@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./main.css">
+    <title>Rock, Paper, Scissors </title>
 </head>
 <body>
+<main class="main">
+    <div class="container">
+        <h1 class="title">Rock, Paper, Scissors quvnoq o'yniga marhamat</h1>
+        <h2 class="info">O'yin besh achkogacha davom etadi</h2>
+        <h2 class="result">Player <span id="score-player"> 0</span> - <span id="score-computer"> 0 </span> Compiuter</h2>
+        <div class="game-filed">
+            <div class="move">
+                <img src="./img/Rock.png" alt="rock" class="move-player">
+            </div>
+            <div class="seperator">VS</div>
+            <div class="move">
+                <img src="./img/Rock.png" alt="" class="move-computer">
+            </div>
+        </div>
+        <div class="result__down"></div>
+        <p class="info__btn">Tugmalardan birini bosing</p>
+        <div class="action__input">
+            <input type="image" class="options" src="img/Rock.png" value="Rock">
+            <input type="image" class="options" src="img/Paper.png" value="Paper">
+            <input type="image" class="options" src="img/Scissors.png" value="Scissors">
+        </div>
+    </div>
+</main>
 
-
-<script src="./main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

@@ -1,47 +1,90 @@
-let userChoise = prompt(`Qog'gz, qaychi, tosh qaysi birini tanlaysiz` ).toLowerCase()
+const options = document.querySelectorAll(".options");
+let scorePlayer = 0;
+let scoreComputer = 0;
+// let resultDown = document.querySelector(".result__down")
 
-function gameFunksion() {
-const computerPlay =["tosh", "qaychi", "qogoz" ];
+options.forEach((option) => {
+    option.addEventListener("click", function () {
+        const inputPlayer = this.value;
 
-let randomNum = Math.floor(Math.random() * 3)
-    let committerChoice = computerPlay[randomNum]
-    console.log( "Kompiuter:", committerChoice)
+        const comOptions =[ "Rock", "Paper",  "Scissors" ];
+        const comInput = comOptions[(Math.floor(Math.random() * 3))];
 
-    function users() {
-        if( userChoise === "tosh" ||  userChoise === "qaychi" || userChoise === "qogoz"){
-            return userChoise
-        }else {
-            alert( "Siz mavjud bo'lmagan xolatni kirgizdingiz")
-            window.location.reload(true);
+
+        updateMoves(inputPlayer, comInput);
+        compareInputs(inputPlayer, comInput);
+        updateScore();
+        if(checkWinner()) {
+            scorePlayer = scoreComputer = 0;
+            updateScore();
+
+            document.querySelector(".result__down").innerText = compareInputs(inputPlayer, comInput);
         }
-    };
-    users();
-    let compare = function (choise1, choise2) {
-        if (choise1 == choise2){
-            return "Natijalar bir xil"
-        }
-        else if(choise1 == "tosh"){
-            if (choise2 == "qaychi") {
-               return  "Tabriklaymiz Tosh yutdi"
-            } else {
-                return "yutqazdingiz"
-            }
-        }
-        else if(choise1 == "qogoz"){
-            if(choise2 == "tosh"){
-                return "Afsus Qaychi yutdi"
-            }else {return "Tabriklaymiz qog'oz yutdi"}
-        }
-        else if(choise1 == "qaychi"){
-            if(choise2 == "qogoz"){
-                return "Tabriklaymiz qaychi yutdi"
-            }else {
-                return "Afsus qog'oz yutdi"
-            }
-        }
-    };
-    console.log( "Foydalanuvchi:", userChoise)
-    console.log(compare(userChoise, committerChoice))
+    })
+})
+
+function updateMoves(inputPlayer, comInput){
+    document.querySelector(".move-player").src =`./img/${inputPlayer}.png`;
+    document.querySelector(".move-computer").src =`./img/${comInput}.png`;
 }
-    gameFunksion();
+function compareInputs(inputPlayer, comInput) {
+    const currentMatch = `${inputPlayer} vs ${comInput}`;
+    if (inputPlayer === comInput) {
+        alert(`${currentMatch} is a Tie`);
+        return;
+        // return `${currentMatch} is a Tie`;
+    }
 
+    if (inputPlayer === "Rock") {
+        if (comInput === "Scissors") {
+            alert(`${currentMatch} = You Win`);
+            // return `${currentMatch} = You Win`;
+            scorePlayer++;
+        } else {
+            alert(`${currentMatch} = Computer Wins`);
+            // return `${currentMatch} = Computer Wins`;
+            scoreComputer++;
+        }
+    }
+    else if (inputPlayer === "Paper") {
+        if (comInput === "Rock") {
+            alert(`${currentMatch} = You Win`);
+            // return `${currentMatch} = You Win`;
+            scorePlayer++;
+        } else {
+            alert(`${currentMatch} = Computer Wins`);
+            // return `${currentMatch} = Computer Wins`;
+            scoreComputer++;
+        }
+    }
+    else {
+        if (comInput === "Paper") {
+            alert(`${currentMatch} = You Win`);
+            // return `${currentMatch} = You Win`;
+            scorePlayer++;
+        } else {
+            alert(`${currentMatch} = Computer Wins`);
+            // return `${currentMatch} = Computer Wins`;
+            scoreComputer++;
+        }
+    }
+}
+function updateScore() {
+    document.querySelector("#score-player").textContent = scorePlayer;
+    document.querySelector("#score-computer").textContent = scoreComputer;
+
+}
+function checkWinner() {
+    if (scorePlayer === 5 || scoreComputer === 5) {
+        const winner =
+            scorePlayer === 5
+                ? "You win the game! Congratulations!"
+                : "Computer wins the game! Try again next time!";
+        alert(winner);
+        return true;
+    }
+    return false;
+}
+// console.log(  compare( userChooseCharacter, computerPlay[1].name))
+
+// document.querySelector(".result__down").textContent  = compareInputs(inputPlayer, comInput)
